@@ -38,7 +38,7 @@ public class PlayerDroneController : MonoBehaviour
         pitch += mouseInput.x * sensitivity * Time.deltaTime * 50;
         float yaw = eulerRotation.y + mouseInput.y * sensitivity * Time.deltaTime * 50;
 
-        pitch = Mathf.Clamp(pitch, -60f, 60f); // Limits the up/down rotation
+        pitch = Mathf.Clamp(pitch, -80f, 80f); // Limits the up/down rotation
 
         transform.rotation = Quaternion.Euler(pitch, yaw, 0);
     }
