@@ -7,6 +7,7 @@ public class RobotFreeAnim : MonoBehaviour {
 	Vector3 rot = Vector3.zero;
 	float rotSpeed = 40f;
 	Animator anim;
+	[SerializeField] private PlayerUtilityController player;
 
 	// Use this for initialization
 	void Awake()
@@ -25,14 +26,17 @@ public class RobotFreeAnim : MonoBehaviour {
 	void CheckKey()
 	{
 		// Walk
-		if (Input.GetKey(KeyCode.I))
+		if (Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.J) ||
+			Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.L))
 		{
 			anim.SetBool("Walk_Anim", true);
 		}
-		else if (Input.GetKeyUp(KeyCode.I))
+		else if (Input.GetKeyUp(KeyCode.I) || Input.GetKeyUp(KeyCode.J) ||
+				 Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.L) || player.GetIsGrounded()) 
 		{
 			anim.SetBool("Walk_Anim", false);
 		}
+
 
 		/*
 		// Rotate Left

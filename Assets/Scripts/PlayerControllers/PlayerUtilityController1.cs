@@ -38,6 +38,7 @@ public class PlayerUtilityController : MonoBehaviour
         CheckSurrounding();
     }
 
+    // Get keyboard input from the user
     private void CheckInput()
     {
         
@@ -68,14 +69,15 @@ public class PlayerUtilityController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
             Vector3 jump = new Vector3(0f, 1f, 0f);
-            rb.AddForce(jump * 0.3f, ForceMode.Impulse);
+            rb.AddForce(jump * 0.2f, ForceMode.Impulse);
         }
         if (Input.GetKey(KeyCode.O))
         {
-            Debug.Log("Shoot Stun Projectile");
+            Debug.Log("Shoot Stun Projectile/Stun Explosion");
         }
     }
 
+    // Check if player can jump based off is Grounded
     private void CheckIfCanJump()
     {
         if (isGrounded)
@@ -100,9 +102,15 @@ public class PlayerUtilityController : MonoBehaviour
         }
     }
 
+    // Return if the player is grounded
     private bool CheckIfGrounded()
     {
         RaycastHit hit;
         return Physics.Raycast(groundCheck.position, -transform.up, out hit, groundCheckRadius);
+    }
+
+    public bool GetIsGrounded()
+    {
+        return isGrounded;
     }
 }
