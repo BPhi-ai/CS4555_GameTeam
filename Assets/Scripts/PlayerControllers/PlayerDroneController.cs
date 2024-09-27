@@ -80,6 +80,9 @@ public class PlayerDroneController : MonoBehaviour
     private Transform selection;
     private RaycastHit raycastHit;
 
+
+    // Code referenced by https://github.com/DA-LAB-Tutorials/YouTube-Unity-Tutorials/blob/main/OutlineSelection.cs
+    // However, this likely needs a rework in the future if time permits one
     void OutlineEnemy()
     {
         if (highlight != null)
@@ -120,7 +123,6 @@ public class PlayerDroneController : MonoBehaviour
                 selection = highlight;
                 selection.gameObject.GetComponent<Outline>().enabled = true;
                 selection.gameObject.GetComponent<Outline>().OutlineColor = Color.yellow;
-                print("Mouse down, highlighted");
 
                 // Clear the highlight as it has now become a selection
                 highlight = null;
