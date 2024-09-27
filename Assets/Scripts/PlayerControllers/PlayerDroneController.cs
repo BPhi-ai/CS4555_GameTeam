@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerDroneController : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class PlayerDroneController : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
+
+        // Raycasts
+        OutlineEnemy();
     }
 
     void Rotation()
@@ -70,5 +74,64 @@ public class PlayerDroneController : MonoBehaviour
         Vector3 input = new Vector3(horizontalInput, 0f, verticalInput);
 
         transform.Translate(input * speed * Time.deltaTime);
+    }
+
+    private Transform highlight;
+    private Transform selection;
+    private RaycastHit raycastHit;
+
+    void OutlineEnemy()
+    {
+        if (highlight != null)
+        {
+            // Reset the highlight outline if we are no longer hovering over it
+            highlight.gameObject.GetComponent<Outline>().enabled = false;
+            highlight = null;
+        }
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (!EventSystem.current.IsPointerOverGameObject() && Physics.Raycast(ray, out raycastHit))
+        {
+            Transform hitTransform = raycastHit.transform;
+
+            if (hitTransform.CompareTag("Enemy") && hitTransform != selection)
+            {
+                highlight = hitTransform;
+                var outline = highlight.gameObject.GetComponent<Outline>();
+
+                if (outline != null)
+                {
+                    // outline.enabled = true; im now scrapping outlines due to inconsistency
+                    outline.OutlineColor = Color.blue;
+                }
+            }
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (highlight)
+            {
+                // Select the current enemy (highlighted object)
+                if (selection != null)
+                {
+                    selection.gameObject.GetComponent<Outline>().enabled = false;
+                }
+
+                selection = highlight;
+                selection.gameObject.GetComponent<Outline>().enabled = true;
+                selection.gameObject.GetComponent<Outline>().OutlineColor = Color.yellow;
+                print("Mouse down, highlighted");
+
+                // Clear the highlight as it has now become a selection
+                highlight = null;
+            }
+            else if (selection != null)
+            {
+                // Deselect the current selection if clicking outside an enemy
+                selection.gameObject.GetComponent<Outline>().OutlineColor = Color.blue;
+                selection.gameObject.GetComponent<Outline>().enabled = false;
+                selection = null;
+            }
+        }
     }
 }
