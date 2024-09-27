@@ -30,7 +30,17 @@ public class PlayerUtilityController : MonoBehaviour
     {
         // This was a temporary movement for my cube, will add stuff to the controller later.
         CheckIfCanJump();
+        CheckInput();
+    }
 
+    private void FixedUpdate()
+    {
+        CheckSurrounding();
+    }
+
+    private void CheckInput()
+    {
+        
         if (Input.GetKey(KeyCode.I))
         {
             Vector3 movement = new Vector3(0f, 0f, 1f * Time.deltaTime * speed);
@@ -58,17 +68,12 @@ public class PlayerUtilityController : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
             Vector3 jump = new Vector3(0f, 1f, 0f);
-            rb.AddForce(jump * 0.2f, ForceMode.Impulse);
+            rb.AddForce(jump * 0.3f, ForceMode.Impulse);
         }
-        if (Input.GetKey("o"))
+        if (Input.GetKey(KeyCode.O))
         {
             Debug.Log("Shoot Stun Projectile");
         }
-    }
-
-    private void FixedUpdate()
-    {
-        CheckSurrounding();
     }
 
     private void CheckIfCanJump()
