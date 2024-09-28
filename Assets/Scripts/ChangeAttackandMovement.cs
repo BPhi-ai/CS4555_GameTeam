@@ -20,7 +20,7 @@ public class ChangeAnimation : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            anim.SetTrigger("Idle");
+            anim.SetBool("Idle", true);
         }
     }
 }
