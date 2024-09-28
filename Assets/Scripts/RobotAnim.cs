@@ -26,7 +26,7 @@ public class RobotAnim : MonoBehaviour
 
     void CheckKey()
     {
-        // Walk
+        // Walk Animation (Messy)
         if ((Input.GetKey(KeyCode.I) || Input.GetKey(KeyCode.J) ||
             Input.GetKey(KeyCode.K) || Input.GetKey(KeyCode.L)) && player.GetIsGrounded())
         {

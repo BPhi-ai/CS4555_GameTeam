@@ -38,33 +38,29 @@ public class PlayerUtilityController : MonoBehaviour
         CheckSurrounding();
     }
 
+    #region Get Input Function
     // Get keyboard input from the user
     private void CheckInput()
     {
-        
+
+        float moveX = 0;
+        float moveZ = 0;
+    
         if (Input.GetKey(KeyCode.I))
         {
-            Vector3 movement = new Vector3(0f, 0f, 1f * Time.deltaTime * speed);
-            movement = transform.TransformDirection(movement);
-            transform.position += movement;
+            moveZ = 1f;
         }
         if (Input.GetKey(KeyCode.J))
         {
-            Vector3 movement = new Vector3(-1f * Time.deltaTime * speed, 0, 0);
-            movement = transform.TransformDirection(movement);
-            transform.position += movement;
+            moveX = -1f;
         }
         if (Input.GetKey(KeyCode.K))
         {
-            Vector3 movement = new Vector3(0f, 0f, -1f * Time.deltaTime * speed);
-            movement = transform.TransformDirection(movement);
-            transform.position += movement;
+            moveZ = -1f;
         }
         if (Input.GetKey(KeyCode.L))
         {
-            Vector3 movement = new Vector3(1f * Time.deltaTime * speed, 0, 0);
-            movement = transform.TransformDirection(movement);
-            transform.position += movement;
+            moveX = 1f;
         }
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
@@ -75,8 +71,15 @@ public class PlayerUtilityController : MonoBehaviour
         {
             Debug.Log("Shoot Stun Projectile/Stun Explosion");
         }
-    }
 
+        // Normalize movement so diagonal movement isn't faster
+        Vector3 movement = new Vector3(moveX, 0f, moveZ).normalized;
+        movement = transform.TransformDirection(movement);
+        transform.position += movement * speed * Time.deltaTime;
+    }
+    #endregion
+
+    #region Check If Player Can Jump Functions
     // Check if player can jump based off is Grounded
     private void CheckIfCanJump()
     {
@@ -113,4 +116,5 @@ public class PlayerUtilityController : MonoBehaviour
     {
         return isGrounded;
     }
+    #endregion
 }
