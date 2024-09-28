@@ -70,6 +70,7 @@ public class RobotShooterMovement : MonoBehaviour
             {
                 //print("Marked enemy found");
                 Vector3 direction = enemy.transform.position - transform.position;
+                direction.y = 0;
                 transform.rotation = Quaternion.LookRotation(direction);
                 return true;
             }
