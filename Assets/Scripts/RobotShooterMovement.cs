@@ -16,36 +16,46 @@ public class RobotShooterMovement : MonoBehaviour
 
     void Update()
     {
+        bool moving = false;
         if(Input.GetKey("w"))
         {
-            anim.SetTrigger("Run");
+            moving = true;
+            anim.SetBool("Run", true);
             Vector3 movement = new Vector3(0f, 0f, 1f * Time.deltaTime * speed);
             //movement = transform.TransformDirection(movement);
             transform.position += movement;
         }
         if(Input.GetKey("a"))
         {
-            anim.SetTrigger("Run");
+            moving = true;
+            anim.SetBool("Run", true);
             Vector3 movement = new Vector3(-1f * Time.deltaTime * speed, 0, 0);
             //movement = transform.TransformDirection(movement);
             transform.position += movement;
         }
         if(Input.GetKey("s"))
         {
-            anim.SetTrigger("Run");
+            moving = true;
+            anim.SetBool("Run", true);
             Vector3 movement = new Vector3(0f, 0f, -1f * Time.deltaTime * speed);
             //movement = transform.TransformDirection(movement);
             transform.position += movement;
         }
         if(Input.GetKey("d"))
         {
-            anim.SetTrigger("Run");
+            moving = true;
+            anim.SetBool("Run", true);
             Vector3 movement = new Vector3(1f * Time.deltaTime * speed, 0, 0);
             //movement = transform.TransformDirection(movement);
             transform.position += movement;
         }
+        /*
+        if (!moving)
+        {
+            anim.SetTrigger("Idle");
+        }*/
 
-        if (!RotateTowardsMarkedEnemies()) // If you can't find a marked enemy to look at, look at the mouse instead
+        if (!RotateTowardsMarkedEnemies()) // If you C
         {
             LookAtMouse();
         }
