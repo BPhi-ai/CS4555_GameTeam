@@ -17,39 +17,7 @@ public class RobotShooterMovement : MonoBehaviour
     
     void Update()
     {
-        bool moving = false;
-        if(Input.GetKey("w"))
-        {
-            moving = true;
-            anim.SetBool("Run", true);
-            Vector3 movement = new Vector3(0f, 0f, 1f * Time.deltaTime * speed);
-            //movement = transform.TransformDirection(movement);
-            transform.position += movement;
-        }
-        if(Input.GetKey("a"))
-        {
-            moving = true;
-            anim.SetBool("Run", true);
-            Vector3 movement = new Vector3(-1f * Time.deltaTime * speed, 0, 0);
-            //movement = transform.TransformDirection(movement);
-            transform.position += movement;
-        }
-        if(Input.GetKey("s"))
-        {
-            moving = true;
-            anim.SetBool("Run", true);
-            Vector3 movement = new Vector3(0f, 0f, -1f * Time.deltaTime * speed);
-            //movement = transform.TransformDirection(movement);
-            transform.position += movement;
-        }
-        if(Input.GetKey("d"))
-        {
-            moving = true;
-            anim.SetBool("Run", true);
-            Vector3 movement = new Vector3(1f * Time.deltaTime * speed, 0, 0);
-            //movement = transform.TransformDirection(movement);
-            transform.position += movement;
-        }
+        CheckInput();
         /*
         if (!moving)
         {
@@ -60,6 +28,42 @@ public class RobotShooterMovement : MonoBehaviour
         {
             LookAtMouse();
         }
+    }
+
+    private void CheckInput()
+    {
+        float moveX = 0;
+        float moveZ = 0;
+
+        bool moving = false;
+        if (Input.GetKey("w"))
+        {
+            moving = true;
+            anim.SetBool("Run", true);
+            moveZ = 1f;
+        }
+        if (Input.GetKey("a"))
+        {
+            moving = true;
+            anim.SetBool("Run", true);
+            moveX = -1f;
+        }
+        if (Input.GetKey("s"))
+        {
+            moving = true;
+            anim.SetBool("Run", true);
+            moveZ = -1f;
+        }
+        if (Input.GetKey("d"))
+        {
+            moving = true;
+            anim.SetBool("Run", true);
+            moveX = 1f;
+        }
+
+        Vector3 movement = new Vector3(moveX, 0f, moveZ).normalized;
+        movement = transform.TransformDirection(movement);
+        transform.position += movement * speed * Time.deltaTime;
     }
 
     bool RotateTowardsMarkedEnemies()
