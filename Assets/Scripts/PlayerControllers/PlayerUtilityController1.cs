@@ -9,7 +9,10 @@ public class PlayerUtilityController : MonoBehaviour
     //[SerializeField] private float speedRotate = 100f;
 
     public LayerMask whatIsGround;
-    public Transform groundCheck;
+    public Transform groundCheck1;
+    public Transform groundCheck2;
+    public Transform groundCheck3;
+    public ParticleSystem part;
 
     public float groundCheckRadius = 0.0f;
 
@@ -23,7 +26,8 @@ public class PlayerUtilityController : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-        rb = GetComponent <Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+
     }
 
     void Update()
@@ -70,6 +74,7 @@ public class PlayerUtilityController : MonoBehaviour
         if (Input.GetKey(KeyCode.O))
         {
             Debug.Log("Shoot Stun Projectile/Stun Explosion");
+            part.Play();
         }
 
         // Normalize movement so diagonal movement isn't faster
@@ -105,11 +110,13 @@ public class PlayerUtilityController : MonoBehaviour
         }
     }
 
-    // Return if the player is grounded
+    // Return whether the player is grounded if at least one of the legs reside on the ground
     private bool CheckIfGrounded()
     {
         RaycastHit hit;
-        return Physics.Raycast(groundCheck.position, -transform.up, out hit, groundCheckRadius);
+        return Physics.Raycast(groundCheck1.position, -transform.up, out hit, groundCheckRadius) ||
+               Physics.Raycast(groundCheck2.position, -transform.up, out hit, groundCheckRadius) ||
+               Physics.Raycast(groundCheck3.position, -transform.up, out hit, groundCheckRadius);
     }
 
     public bool GetIsGrounded()

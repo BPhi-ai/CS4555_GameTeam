@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RobotAnim : MonoBehaviour
 {
-
+    // Change the animation for Utility Robot
     Vector3 rot = Vector3.zero;
     float rotSpeed = 40f;
     Animator anim;
