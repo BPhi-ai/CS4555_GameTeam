@@ -42,7 +42,7 @@ public class RobotAnim : MonoBehaviour
             anim.SetBool("Walk_Anim", false);
         }
 
-        /*
+        
 		// Rotate Left
 		if (Input.GetKey(KeyCode.J))
 		{
@@ -55,7 +55,7 @@ public class RobotAnim : MonoBehaviour
 			rot[1] += rotSpeed * Time.fixedDeltaTime;
 		} 
 
-		
+		/*
 		// Roll
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
@@ -67,7 +67,7 @@ public class RobotAnim : MonoBehaviour
 			{
 				anim.SetBool("Roll_Anim", true);
 			}
-		} */
+		}*/
 
         // Close
         if (Input.GetKeyDown(KeyCode.LeftControl))
