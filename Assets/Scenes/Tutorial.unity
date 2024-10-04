@@ -667,6 +667,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4988066152547784, guid: f8c03799d60ef1e4696251922cde2e33, type: 3}
   m_PrefabInstance: {fileID: 982931892}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &1008183804 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8049857385498128229, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+  m_PrefabInstance: {fileID: 1453428972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1062329848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1024,11 +1029,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5994286044705911640, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45.2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5994286044705911640, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 230
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 5994286044705911640, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1185,7 +1190,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 243594851653850261, guid: bdd91695cfcf4b643963af1fce587ef5, type: 3}
+      propertyPath: droneCamera
+      value: 
+      objectReference: {fileID: 1008183804}
+    m_RemovedComponents:
+    - {fileID: 5469653792202424679, guid: bdd91695cfcf4b643963af1fce587ef5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
