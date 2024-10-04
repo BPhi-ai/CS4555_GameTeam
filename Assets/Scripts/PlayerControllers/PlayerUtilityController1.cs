@@ -88,10 +88,10 @@ public class PlayerUtilityController : MonoBehaviour
         {
             moveZ = 1f;
         }
-        if (Input.GetKey(KeyCode.Space) && canJump)
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             Vector3 jump = new Vector3(0f, 1f, 0f);
-            rb.AddForce(jump * 0.2f, ForceMode.Impulse);
+            rb.AddForce(jump * 10f, ForceMode.Impulse);
         }
         if (Input.GetKey(KeyCode.O) && isStunReady)
         {
