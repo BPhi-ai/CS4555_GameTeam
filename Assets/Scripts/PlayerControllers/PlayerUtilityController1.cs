@@ -7,19 +7,28 @@ public class PlayerUtilityController : MonoBehaviour
     private Rigidbody rb; 
     [SerializeField] private float speed = 5f;
     //[SerializeField] private float speedRotate = 100f;
+    [SerializeField] private Transform cam;
 
     public LayerMask whatIsGround;
     public Transform groundCheck1;
     public Transform groundCheck2;
     public Transform groundCheck3;
-    public ParticleSystem part;
+    public ParticleSystem lightPart;
+    public ParticleSystem smokePart;
+    public ParticleSystem shockWavePart;
+    public ParticleSystem lightningPart;
+
 
     public float groundCheckRadius = 0.0f;
+    public float stunCooldown = 0f;
+
+    private float lastStunTime;
 
     // public float groundCheckDistance;
 
     [SerializeField] private bool isGrounded = false;
     private bool canJump = false;
+    [SerializeField] private bool isStunReady = true;
 
     private Vector3 direction;
 
@@ -27,14 +36,18 @@ public class PlayerUtilityController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
     }
 
     void Update()
     {
         // This was a temporary movement for my cube, will add stuff to the controller later.
         CheckIfCanJump();
+        if (CheckIsStunReady())
+        {
+            isStunReady = true;
+        }
         CheckInput();
+        ChangeRotationToZero();
     }
 
     private void FixedUpdate()
@@ -49,38 +62,63 @@ public class PlayerUtilityController : MonoBehaviour
 
         float moveX = 0;
         float moveZ = 0;
+
+        Vector3 camForward = cam.forward;
+        Vector3 camRight = cam.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
     
         if (Input.GetKey(KeyCode.I))
         {
-            moveZ = 1f;
+            moveX = 1f;
         }
         if (Input.GetKey(KeyCode.J))
         {
-            moveX = -1f;
+            moveZ = -1f;
         }
         if (Input.GetKey(KeyCode.K))
         {
-            moveZ = -1f;
+            moveX = -1f;
         }
         if (Input.GetKey(KeyCode.L))
         {
-            moveX = 1f;
+            moveZ = 1f;
         }
         if (Input.GetKey(KeyCode.Space) && canJump)
         {
             Vector3 jump = new Vector3(0f, 1f, 0f);
             rb.AddForce(jump * 0.2f, ForceMode.Impulse);
         }
-        if (Input.GetKey(KeyCode.O))
+        if (Input.GetKey(KeyCode.O) && isStunReady)
         {
-            Debug.Log("Shoot Stun Projectile/Stun Explosion");
-            part.Play();
+            // Play necessary particle effects
+            smokePart.Play();
+            lightningPart.Play();
+            lightPart.Play();
+            shockWavePart.Play();
+
+            lastStunTime = Time.time;
+            isStunReady = false;
         }
 
         // Normalize movement so diagonal movement isn't faster
+        Vector3 forwardRelativeVertInput = moveX * camForward;
+        Vector3 rightRelativeVertInput = moveZ * camRight;
+
+        Vector3 cameraRelativeMovement = forwardRelativeVertInput + rightRelativeVertInput;
+        cameraRelativeMovement = cameraRelativeMovement.normalized;
+
+        transform.position += cameraRelativeMovement * speed * Time.deltaTime;
+
+        /*
         Vector3 movement = new Vector3(moveX, 0f, moveZ).normalized;
         movement = transform.TransformDirection(movement);
         transform.position += movement * speed * Time.deltaTime;
+        */
     }
     #endregion
 
@@ -110,6 +148,24 @@ public class PlayerUtilityController : MonoBehaviour
         }
     }
 
+    private void ChangeRotationToZero()
+    {
+        if (CheckForRotation())
+        {
+            transform.rotation = Quaternion.identity;
+        }
+    }
+
+    private bool CheckForRotation()
+    {
+        if (transform.rotation != Quaternion.identity)
+        {
+            return true; // Return true if rotated off 0,0,0 
+        }
+
+        return false;
+    }
+
     // Return whether the player is grounded if at least one of the legs reside on the ground
     private bool CheckIfGrounded()
     {
@@ -117,6 +173,16 @@ public class PlayerUtilityController : MonoBehaviour
         return Physics.Raycast(groundCheck1.position, -transform.up, out hit, groundCheckRadius) ||
                Physics.Raycast(groundCheck2.position, -transform.up, out hit, groundCheckRadius) ||
                Physics.Raycast(groundCheck3.position, -transform.up, out hit, groundCheckRadius);
+    }
+
+    private bool CheckIsStunReady()
+    {
+        if ((Time.time - lastStunTime) < stunCooldown)
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public bool GetIsGrounded()
