@@ -4063,6 +4063,11 @@ Texture2D:
     offset: 0
     size: 0
     path: 
+--- !u!198 &400658184 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1919659661684417858, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+  m_PrefabInstance: {fileID: 1226187809}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &422418885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6019,6 +6024,11 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 8049857385498128229, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
   m_PrefabInstance: {fileID: 1453428972}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1008183807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5994286044705911640, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+  m_PrefabInstance: {fileID: 1453428972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1011101514
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6825,6 +6835,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: robotSphere
       objectReference: {fileID: 0}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1008183807}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: lightPart
+      value: 
+      objectReference: {fileID: 1648484392}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: smokePart
+      value: 
+      objectReference: {fileID: 1839553571}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: lightningPart
+      value: 
+      objectReference: {fileID: 2120146896}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: shockWavePart
+      value: 
+      objectReference: {fileID: 400658184}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7567,6 +7597,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdd91695cfcf4b643963af1fce587ef5, type: 3}
+--- !u!198 &1648484392 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1919659661349378408, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+  m_PrefabInstance: {fileID: 1226187809}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1679120299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4365241942900340, guid: 30e869da5c345464eb905a3dfb869ad3, type: 3}
@@ -8037,6 +8072,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 297dfcc42826f8145b02724d1d95810a, type: 3}
   m_PrefabInstance: {fileID: 1829729708}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1839553571 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1919659661192489716, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+  m_PrefabInstance: {fileID: 1226187809}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1873288477
 MonoBehaviour:
@@ -8722,6 +8762,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 297dfcc42826f8145b02724d1d95810a, type: 3}
   m_PrefabInstance: {fileID: 2096666447}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2120146896 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1919659661415145660, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+  m_PrefabInstance: {fileID: 1226187809}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
