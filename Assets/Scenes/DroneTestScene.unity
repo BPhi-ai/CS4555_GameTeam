@@ -24690,6 +24690,7 @@ MonoBehaviour:
   groundCheckRadius: 0.5
   stunCooldown: 5
   stunRadius: 6
+  rotSpeed: 40
   isGrounded: 0
   isStunReady: 1
 --- !u!4 &9154735734965403784
