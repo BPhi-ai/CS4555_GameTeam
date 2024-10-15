@@ -14,7 +14,6 @@ public class PlayerUtilityController : MonoBehaviour
     public Transform groundCheck2;
     public Transform groundCheck3;
     public ParticleSystem lightPart;
-    public ParticleSystem smokePart;
     public ParticleSystem shockWavePart;
     public ParticleSystem lightningPart;
 
@@ -96,10 +95,11 @@ public class PlayerUtilityController : MonoBehaviour
         if (Input.GetKey(KeyCode.O) && isStunReady)
         {
             // Play necessary particle effects
-            smokePart.Play();
             lightningPart.Play();
             lightPart.Play();
             shockWavePart.Play();
+
+            Debug.Log("shockWavePart Radius is " + shockWavePart.shape.radius);
 
             lastStunTime = Time.time;
             isStunReady = false;
