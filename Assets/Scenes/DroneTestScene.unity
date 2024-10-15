@@ -6882,7 +6882,7 @@ ParticleSystem:
         m_RotationOrder: 4
   ShapeModule:
     serializedVersion: 6
-    enabled: 0
+    enabled: 1
     type: 4
     angle: 25
     length: 5
@@ -6970,7 +6970,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 2
       mode: 0
       spread: 0
       speed:
@@ -16600,7 +16600,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.25
+      value: 1
       mode: 0
       spread: 0
       speed:
@@ -23435,6 +23435,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6635786917067615783, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8833519889588798308, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
