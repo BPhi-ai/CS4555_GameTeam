@@ -21,6 +21,7 @@ public class PlayerUtilityController : MonoBehaviour
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 0f;
     public float stunRadius = 0.0f;
+    public float rotSpeed = 40f;
 
     private float lastStunTime;
 

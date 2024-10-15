@@ -6,7 +6,7 @@ public class RobotAnim : MonoBehaviour
 {
     // Change the animation for Utility Robot
     Vector3 rot = Vector3.zero;
-    float rotSpeed = 40f;
+    
     Animator anim;
     [SerializeField] private PlayerUtilityController player;
 
@@ -41,19 +41,6 @@ public class RobotAnim : MonoBehaviour
         {
             anim.SetBool("Walk_Anim", false);
         }
-
-        
-		// Rotate Left
-		if (Input.GetKey(KeyCode.J))
-		{
-			rot[1] -= rotSpeed * Time.fixedDeltaTime;
-		}
-
-		// Rotate Right
-		if (Input.GetKey(KeyCode.L))
-		{
-			rot[1] += rotSpeed * Time.fixedDeltaTime;
-		} 
 
 		/*
 		// Roll
