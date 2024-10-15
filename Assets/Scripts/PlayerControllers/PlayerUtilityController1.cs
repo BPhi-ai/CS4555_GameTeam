@@ -14,13 +14,13 @@ public class PlayerUtilityController : MonoBehaviour
     public Transform groundCheck2;
     public Transform groundCheck3;
     public ParticleSystem lightPart;
-    public ParticleSystem smokePart;
     public ParticleSystem shockWavePart;
     public ParticleSystem lightningPart;
 
 
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 0f;
+    public float stunRadius = 0.0f;
 
     private float lastStunTime;
 
@@ -96,10 +96,22 @@ public class PlayerUtilityController : MonoBehaviour
         if (Input.GetKey(KeyCode.O) && isStunReady)
         {
             // Play necessary particle effects
-            smokePart.Play();
             lightningPart.Play();
             lightPart.Play();
             shockWavePart.Play();
+
+            // Check who is in radius
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                // Stun enemies here 
+                if (distance <= stunRadius)
+                {
+                    Debug.Log(enemy.name + " is a distance of " + distance);
+                }
+                
+            }
 
             lastStunTime = Time.time;
             isStunReady = false;
