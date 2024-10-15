@@ -20,6 +20,7 @@ public class PlayerUtilityController : MonoBehaviour
 
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 0f;
+    public float stunRadius = 0.0f;
 
     private float lastStunTime;
 
@@ -99,7 +100,18 @@ public class PlayerUtilityController : MonoBehaviour
             lightPart.Play();
             shockWavePart.Play();
 
-            Debug.Log("shockWavePart Radius is " + shockWavePart.shape.radius);
+            // Check who is in radius
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                // Stun enemies here 
+                if (distance <= stunRadius)
+                {
+                    Debug.Log(enemy.name + " is a distance of " + distance);
+                }
+                
+            }
 
             lastStunTime = Time.time;
             isStunReady = false;

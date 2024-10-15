@@ -11281,7 +11281,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.1
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -11745,7 +11745,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.5
+      value: 6
       mode: 0
       spread: 0
       speed:
@@ -23335,7 +23335,7 @@ Transform:
   m_GameObject: {fileID: 8149913729314594420}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.18393, y: 0.020000309, z: -0.00071095116}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -24685,6 +24685,7 @@ MonoBehaviour:
   lightningPart: {fileID: 1919659662565603528}
   groundCheckRadius: 0.5
   stunCooldown: 5
+  stunRadius: 6
   isGrounded: 0
   isStunReady: 1
 --- !u!4 &9154735734965403784
