@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerUtilityController : MonoBehaviour
 {
-    private Rigidbody rb; 
+    private Rigidbody rb;
     [SerializeField] private float speed = 5f;
     //[SerializeField] private float speedRotate = 100f;
+    [SerializeField] private float smoothTime = 0.05f;
     [SerializeField] private Transform cam;
 
     public LayerMask whatIsGround;
@@ -21,9 +22,10 @@ public class PlayerUtilityController : MonoBehaviour
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 0f;
     public float stunRadius = 0.0f;
-    public float rotSpeed = 40f;
+    public float rotSpeed;
 
     private float lastStunTime;
+
 
     // public float groundCheckDistance;
 
@@ -32,6 +34,7 @@ public class PlayerUtilityController : MonoBehaviour
     [SerializeField] private bool isStunReady = true;
 
     private Vector3 direction;
+    private Vector3 moveDirection;
 
     // Update is called once per frame
     void Start()
@@ -48,7 +51,7 @@ public class PlayerUtilityController : MonoBehaviour
             isStunReady = true;
         }
         CheckInput();
-        ChangeRotationToZero();
+        // ChangeRotationToZero();
     }
 
     private void FixedUpdate()
@@ -60,7 +63,9 @@ public class PlayerUtilityController : MonoBehaviour
     // Get keyboard input from the user
     private void CheckInput()
     {
+        
 
+        // Get input for ijkl 
         float moveX = 0;
         float moveZ = 0;
 
@@ -72,7 +77,7 @@ public class PlayerUtilityController : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
-    
+
         if (Input.GetKey(KeyCode.I))
         {
             moveX = 1f;
@@ -89,6 +94,7 @@ public class PlayerUtilityController : MonoBehaviour
         {
             moveZ = 1f;
         }
+
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             Vector3 jump = new Vector3(0f, 1f, 0f);
@@ -111,7 +117,7 @@ public class PlayerUtilityController : MonoBehaviour
                 {
                     Debug.Log(enemy.name + " is a distance of " + distance);
                 }
-                
+
             }
 
             lastStunTime = Time.time;
@@ -122,16 +128,33 @@ public class PlayerUtilityController : MonoBehaviour
         Vector3 forwardRelativeVertInput = moveX * camForward;
         Vector3 rightRelativeVertInput = moveZ * camRight;
 
-        Vector3 cameraRelativeMovement = forwardRelativeVertInput + rightRelativeVertInput;
-        cameraRelativeMovement = cameraRelativeMovement.normalized;
+        moveDirection = forwardRelativeVertInput + rightRelativeVertInput;
 
-        transform.position += cameraRelativeMovement * speed * Time.deltaTime;
+        moveDirection.Normalize();
 
-        /*
-        Vector3 movement = new Vector3(moveX, 0f, moveZ).normalized;
-        movement = transform.TransformDirection(movement);
-        transform.position += movement * speed * Time.deltaTime;
-        */
+        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+
+        
+
+        if (moveDirection != Vector3.zero)
+        {
+            //Debug.Log("I am rotating because " + moveDirection + " is not zero");
+            //Quaternion toRotation = Quaternion.LookRotation(moveDirection);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotSpeed * Time.deltaTime);
+            // transform.rotation = Quaternion.LookRotation(moveDirection);
+
+            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+            Debug.Log("toRotation = " + toRotation);
+            Debug.Log("currentRotation before = " + transform.rotation);
+            transform.rotation = toRotation;
+            Debug.Log("currentRotation after = " + transform.rotation);
+            //transform.forward = moveDirection;
+        }
+
+        // Rotate the player
+
+        
+        
     }
     #endregion
 
