@@ -8208,9 +8208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fb097101a356d41818bd4986cef923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletBlock: {fileID: 0}
+  bulletBlock: {fileID: 898352054643807838, guid: fef8ff933f41978459ddf5361b7255cb, type: 3}
   firePoint: {fileID: 1673854597}
-  bulletSpeed: 150
+  bulletSpeed: 100
   timeFix: 0
   moveSpeed: 5
   rotationSpeed: 720
