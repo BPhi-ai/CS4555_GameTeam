@@ -884,17 +884,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 736440842853511220, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
-      propertyPath: maxRange
-      value: 100000
-      objectReference: {fileID: 0}
     - target: {fileID: 1836946701377389474, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 1836946701377389474, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
       propertyPath: m_Layer
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6635786917067615783, guid: 050aab936018ddf47bdf9a41a4d28b19, type: 3}
       propertyPath: m_LocalPosition.x
