@@ -21494,7 +21494,7 @@ GameObject:
   - component: {fileID: 2989392918354205249}
   m_Layer: 0
   m_Name: right_plate
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -22636,7 +22636,7 @@ GameObject:
   - component: {fileID: 3660430439721632477}
   m_Layer: 0
   m_Name: rear_plate
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24568,7 +24568,7 @@ GameObject:
   - component: {fileID: 8530323522537673369}
   m_Layer: 0
   m_Name: left_plate
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24690,7 +24690,7 @@ MonoBehaviour:
   groundCheckRadius: 0.5
   stunCooldown: 5
   stunRadius: 6
-  rotSpeed: 40
+  rotSpeed: 720
   isGrounded: 0
   isStunReady: 1
 --- !u!4 &9154735734965403784
