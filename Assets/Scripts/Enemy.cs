@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public States state = States.IDLE;
 
     public float maxRange = 10000;
+    public GameObject closestPlayer = null;
 
     RaycastHit hit;
 
