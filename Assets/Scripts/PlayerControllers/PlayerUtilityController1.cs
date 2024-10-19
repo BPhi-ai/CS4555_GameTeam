@@ -22,7 +22,7 @@ public class PlayerUtilityController : MonoBehaviour
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 0f;
     public float stunRadius = 0.0f;
-    public float rotSpeed;
+    public float rotSpeed = 720f;
 
     private float lastStunTime;
 
@@ -107,6 +107,8 @@ public class PlayerUtilityController : MonoBehaviour
             lightPart.Play();
             shockWavePart.Play();
 
+  
+
             // Check who is in radius
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
             foreach (GameObject enemy in enemies)
@@ -115,6 +117,10 @@ public class PlayerUtilityController : MonoBehaviour
                 // Stun enemies here 
                 if (distance <= stunRadius)
                 {
+                    // Call enemy stun method
+                    Enemy enemScript = enemy.GetComponent<Enemy>();
+                    // Call stun method from enemy script
+                    enemScript.Stun();
                     Debug.Log(enemy.name + " is a distance of " + distance);
                 }
 
@@ -129,26 +135,18 @@ public class PlayerUtilityController : MonoBehaviour
         Vector3 rightRelativeVertInput = moveZ * camRight;
 
         moveDirection = forwardRelativeVertInput + rightRelativeVertInput;
-
-        moveDirection.Normalize();
-
-        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
-
-        
-
-        if (moveDirection != Vector3.zero)
+        if (moveDirection.sqrMagnitude > 0f)
         {
-            //Debug.Log("I am rotating because " + moveDirection + " is not zero");
-            //Quaternion toRotation = Quaternion.LookRotation(moveDirection);
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotSpeed * Time.deltaTime);
-            // transform.rotation = Quaternion.LookRotation(moveDirection);
+            moveDirection.Normalize();
 
-            Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
-            Debug.Log("toRotation = " + toRotation);
-            Debug.Log("currentRotation before = " + transform.rotation);
-            transform.rotation = toRotation;
-            Debug.Log("currentRotation after = " + transform.rotation);
-            //transform.forward = moveDirection;
+            transform.Translate(moveDirection * speed * Time.deltaTime, Space.World);
+
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
+
+            transform.root.rotation = Quaternion.RotateTowards(transform.root.rotation, targetRotation, rotSpeed * Time.deltaTime);
+
+            
         }
 
         // Rotate the player

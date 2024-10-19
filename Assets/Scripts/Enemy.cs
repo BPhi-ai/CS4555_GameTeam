@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     public float maxRange = 10000;
     public float speed = 2.5f;
     public GameObject closestPlayer = null;
+    public ParticleSystem lightning;
 
     RaycastHit hit;
 
@@ -20,6 +21,8 @@ public class Enemy : MonoBehaviour
     public Vector3 randomPosition; // this is the random position to wander to
 
     private float timeStunned = 0.0f;
+    public float timeLightningInterval = 2.0f;
+    private float timePassed = 0.0f; // Used for tracking when to play lightning particle
 
     private void Start()
     {
@@ -58,10 +61,19 @@ public class Enemy : MonoBehaviour
                 break;
             case States.STUNNED:
                 timeStunned += Time.deltaTime;
+                
+                timePassed += Time.deltaTime;
+
+                if (timePassed >= timeLightningInterval)
+                {
+                    lightning.Play();
+                    timePassed = 0.0f;
+                }
 
                 if (timeStunned >= 5.0f)
                 {
                     timeStunned = 0.0f;
+                    timePassed = 0f;
 
                     state = States.WANDER;
                 }
@@ -75,6 +87,11 @@ public class Enemy : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void Stun()
+    {
+        state = States.STUNNED;
     }
 
     public bool SeesPlayer()
