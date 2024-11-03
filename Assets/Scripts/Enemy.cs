@@ -53,11 +53,16 @@ public class Enemy : MonoBehaviour
                     float randomZ = Random.Range(-wanderOffset, wanderOffset);
 
                     randomPosition = new Vector3(startPosition.x + randomX, startPosition.y, startPosition.z + randomZ);
+
+                    // rotate the enemy to look at the random position
+                    Vector3 direction = randomPosition - transform.position;
+                    direction.y = 0;
+
+                    transform.rotation = Quaternion.LookRotation(direction);
                 }
 
-                // Move the player to the random position at all times
+                // Move the enemy to the random position at all times
                 transform.position = Vector3.MoveTowards(transform.position, randomPosition, speed * Time.deltaTime);
-
                 break;
             case States.STUNNED:
                 timeStunned += Time.deltaTime;
