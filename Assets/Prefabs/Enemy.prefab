@@ -141,4 +141,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   maxRange: 100000
+  speed: 2.5
   closestPlayer: {fileID: 0}
+  lightning: {fileID: 0}
+  wanderOffset: 10
+  randomPosition: {x: 0, y: 0, z: 0}
+  timeLightningInterval: 2

@@ -11,10 +11,12 @@ public class Enemy : MonoBehaviour
     public float speed = 2.5f;
     public GameObject closestPlayer = null;
     public ParticleSystem lightning;
+    public ParticleSystem muzzleFlash;
 
     RaycastHit hit;
 
     private float timeToWander = 0.0f;
+    private float timeToShoot = 0.0f;
 
     private Vector3 startPosition;
     public float wanderOffset = 25.0f; // Wandering radius
@@ -24,12 +26,16 @@ public class Enemy : MonoBehaviour
     public float timeLightningInterval = 2.0f;
     private float timePassed = 0.0f; // Used for tracking when to play lightning particle
 
+    private Animator animator;        // Reference to the Animator component
+
     private void Start()
     {
         startPosition = transform.position;
         randomPosition = startPosition;
-    }
 
+        // Get the Animator component attached to the GameObject
+        animator = GetComponent<Animator>();
+    }
     void FixedUpdate()
     {
         switch (state)
@@ -53,11 +59,27 @@ public class Enemy : MonoBehaviour
                     float randomZ = Random.Range(-wanderOffset, wanderOffset);
 
                     randomPosition = new Vector3(startPosition.x + randomX, startPosition.y, startPosition.z + randomZ);
+
+                    // rotate the enemy to look at the random position
+                    Vector3 direction = randomPosition - transform.position;
+                    direction.y = 0;
+
+                    transform.rotation = Quaternion.LookRotation(direction);
                 }
 
-                // Move the player to the random position at all times
+                // Move the enemy to the random position at all times
                 transform.position = Vector3.MoveTowards(transform.position, randomPosition, speed * Time.deltaTime);
 
+                if (Vector3.Distance(transform.position, randomPosition) > 0.1f)
+                {
+                    animator.SetFloat("Y", 1);
+                    animator.SetBool("Aiming", true);
+                }
+                else
+                {
+                    animator.SetFloat("Y", 0);
+                    animator.SetBool("Aiming", false);
+                }
                 break;
             case States.STUNNED:
                 timeStunned += Time.deltaTime;
@@ -77,6 +99,10 @@ public class Enemy : MonoBehaviour
 
                     state = States.WANDER;
                 }
+
+                animator.SetFloat("Y", 0);
+                animator.SetBool("Aiming", false);
+
                 break;
             case States.CHASE:
                 if (!SeesPlayer())
@@ -85,8 +111,27 @@ public class Enemy : MonoBehaviour
                     print("Can't see the player anymore!");
                     break;
                 }
+                Vector3 chaseDirection = closestPlayer.transform.position - transform.position;
+                chaseDirection.y = 0;
+
+                transform.rotation = Quaternion.LookRotation(chaseDirection);
+
+                animator.SetFloat("Y", 0);
+                animator.SetBool("Aiming", true);
+
+                timeToShoot += Time.deltaTime;
+                if (timeToShoot >= 1.0f)
+                {
+                    timeToShoot = 0.0f; // resets the shooting timer
+                    Shoot();
+                }
                 break;
         }
+    }
+
+    public void Shoot()
+    {
+        muzzleFlash.Play();
     }
 
     public void Stun()
@@ -97,43 +142,47 @@ public class Enemy : MonoBehaviour
     public bool SeesPlayer()
     {
         GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-        GameObject closestPlayerSoFar = allPlayers[0]; // if this is a source of error, there isnt any players in the scene with this enemy. Added it to compare check for the closest player (needs an initial player to check)
-        float offsetY = 1;
+        GameObject closestPlayerSoFar = null; 
+        float closestDistanceSoFar = float.MaxValue;
+        float offsetY = 0.6f; // less than 1 now because the utility bot is short
         bool foundPlayer = false;
-
-
 
         foreach (GameObject player in allPlayers)
         {
             Vector3 playerPosition = player.transform.position;
             playerPosition.y += offsetY;
-            // Debug.DrawRay(transform.position, (playerPosition - transform.position).normalized * maxRange, Color.red);
+
+            Vector3 enemyPosition = transform.position;
+            enemyPosition.y += offsetY;
+
             if (Vector3.Distance(transform.position, playerPosition) <= maxRange)
             {
-                if (Physics.Raycast(transform.position, (playerPosition - transform.position), out hit, maxRange))
+                if (Physics.Raycast(enemyPosition, (playerPosition - enemyPosition), out hit, maxRange))
                 {
-                    //print("I hit something called " + hit.collider.name);
                     if (hit.collider.gameObject.CompareTag("Player"))
                     {
-                        if (Vector3.Distance(transform.position, playerPosition) < Vector3.Distance(transform.position, closestPlayerSoFar.transform.position))
+                        float distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
+                        if (distanceToPlayer < closestDistanceSoFar)
                         {
                             foundPlayer = true;
                             closestPlayerSoFar = hit.collider.gameObject;
+                            closestDistanceSoFar = distanceToPlayer;
                         }
                     }
                 }
             }
         }
 
-        if (!foundPlayer)
+        if (foundPlayer)
         {
-            return false;
+            closestPlayer = closestPlayerSoFar;
+            Debug.DrawRay(transform.position, (closestPlayer.transform.position - transform.position).normalized * maxRange, Color.red);
+            return true;
         }
         else
         {
-            closestPlayer = closestPlayerSoFar;
-            Debug.DrawRay(transform.position, (closestPlayer.transform.position - transform.position).normalized * maxRange, Color.red); // Draw a ray to the closest player
-            return true;
+            closestPlayer = null;
+            return false;
         }
     }
 }

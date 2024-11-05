@@ -15,6 +15,8 @@ public class PlayerMovementWithAnimation : MonoBehaviour
 
     private Animator animator;        // Reference to the Animator component
 
+    public Camera droneCamera;
+
     void Start()
     {
         // Get the Animator component attached to the GameObject
@@ -27,8 +29,18 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");  // A and D keys
         float moveZ = Input.GetAxis("Vertical");    // W and S keys
 
+        // Adding these so that movement is relative to the camera
+        Vector3 camForward = droneCamera.transform.forward;
+        Vector3 camRight = droneCamera.transform.right;
+
+        camForward.y = 0;
+        camRight.y = 0;
+
+        Vector3 vectorMovementX = moveX * camRight;
+        Vector3 vectorMovementZ = moveZ * camForward;
+
         // Calculate the movement direction
-        moveDirection = new Vector3(moveX, 0f, moveZ).normalized;
+        moveDirection = (vectorMovementX + vectorMovementZ).normalized;
 
         // If there is movement input, move and rotate the character
         if (moveDirection != Vector3.zero)
