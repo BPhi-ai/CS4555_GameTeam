@@ -24,12 +24,16 @@ public class Enemy : MonoBehaviour
     public float timeLightningInterval = 2.0f;
     private float timePassed = 0.0f; // Used for tracking when to play lightning particle
 
+    private Animator animator;        // Reference to the Animator component
+
     private void Start()
     {
         startPosition = transform.position;
         randomPosition = startPosition;
-    }
 
+        // Get the Animator component attached to the GameObject
+        animator = GetComponent<Animator>();
+    }
     void FixedUpdate()
     {
         switch (state)
@@ -63,6 +67,17 @@ public class Enemy : MonoBehaviour
 
                 // Move the enemy to the random position at all times
                 transform.position = Vector3.MoveTowards(transform.position, randomPosition, speed * Time.deltaTime);
+
+                if (Vector3.Distance(transform.position, randomPosition) > 0.1f)
+                {
+                    animator.SetFloat("Y", 1);
+                    animator.SetBool("Aiming", true);
+                }
+                else
+                {
+                    animator.SetFloat("Y", 0);
+                    animator.SetBool("Aiming", false);
+                }
                 break;
             case States.STUNNED:
                 timeStunned += Time.deltaTime;
@@ -90,6 +105,14 @@ public class Enemy : MonoBehaviour
                     print("Can't see the player anymore!");
                     break;
                 }
+                Vector3 chaseDirection = closestPlayer.transform.position - transform.position;
+                chaseDirection.y = 0;
+
+                transform.rotation = Quaternion.LookRotation(chaseDirection);
+
+                animator.SetFloat("Y", 0);
+                animator.SetBool("Aiming", true);
+
                 break;
         }
     }
