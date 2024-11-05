@@ -11,10 +11,12 @@ public class Enemy : MonoBehaviour
     public float speed = 2.5f;
     public GameObject closestPlayer = null;
     public ParticleSystem lightning;
+    public ParticleSystem muzzleFlash;
 
     RaycastHit hit;
 
     private float timeToWander = 0.0f;
+    private float timeToShoot = 0.0f;
 
     private Vector3 startPosition;
     public float wanderOffset = 25.0f; // Wandering radius
@@ -97,6 +99,10 @@ public class Enemy : MonoBehaviour
 
                     state = States.WANDER;
                 }
+
+                animator.SetFloat("Y", 0);
+                animator.SetBool("Aiming", false);
+
                 break;
             case States.CHASE:
                 if (!SeesPlayer())
@@ -113,8 +119,19 @@ public class Enemy : MonoBehaviour
                 animator.SetFloat("Y", 0);
                 animator.SetBool("Aiming", true);
 
+                timeToShoot += Time.deltaTime;
+                if (timeToShoot >= 1.0f)
+                {
+                    timeToShoot = 0.0f; // resets the shooting timer
+                    Shoot();
+                }
                 break;
         }
+    }
+
+    public void Shoot()
+    {
+        muzzleFlash.Play();
     }
 
     public void Stun()
