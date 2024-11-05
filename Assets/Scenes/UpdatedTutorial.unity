@@ -8130,6 +8130,11 @@ MonoBehaviour:
   markerStartUVY: 0.92597485
   customPoints: []
   handleObject: {fileID: 0}
+--- !u!20 &1875872618 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 8049857385498128229, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+  m_PrefabInstance: {fileID: 1453428972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1934410906 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
@@ -8153,6 +8158,7 @@ MonoBehaviour:
   timeFix: 0
   moveSpeed: 5
   rotationSpeed: 720
+  droneCamera: {fileID: 1875872618}
 --- !u!54 &1934410908
 Rigidbody:
   m_ObjectHideFlags: 0
