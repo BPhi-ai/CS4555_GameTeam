@@ -125,43 +125,47 @@ public class Enemy : MonoBehaviour
     public bool SeesPlayer()
     {
         GameObject[] allPlayers = GameObject.FindGameObjectsWithTag("Player");
-        GameObject closestPlayerSoFar = allPlayers[0]; // if this is a source of error, there isnt any players in the scene with this enemy. Added it to compare check for the closest player (needs an initial player to check)
-        float offsetY = 1;
+        GameObject closestPlayerSoFar = null; 
+        float closestDistanceSoFar = float.MaxValue;
+        float offsetY = 0.6f; // less than 1 now because the utility bot is short
         bool foundPlayer = false;
-
-
 
         foreach (GameObject player in allPlayers)
         {
             Vector3 playerPosition = player.transform.position;
             playerPosition.y += offsetY;
-            // Debug.DrawRay(transform.position, (playerPosition - transform.position).normalized * maxRange, Color.red);
+
+            Vector3 enemyPosition = transform.position;
+            enemyPosition.y += offsetY;
+
             if (Vector3.Distance(transform.position, playerPosition) <= maxRange)
             {
-                if (Physics.Raycast(transform.position, (playerPosition - transform.position), out hit, maxRange))
+                if (Physics.Raycast(enemyPosition, (playerPosition - enemyPosition), out hit, maxRange))
                 {
-                    //print("I hit something called " + hit.collider.name);
                     if (hit.collider.gameObject.CompareTag("Player"))
                     {
-                        if (Vector3.Distance(transform.position, playerPosition) < Vector3.Distance(transform.position, closestPlayerSoFar.transform.position))
+                        float distanceToPlayer = Vector3.Distance(transform.position, playerPosition);
+                        if (distanceToPlayer < closestDistanceSoFar)
                         {
                             foundPlayer = true;
                             closestPlayerSoFar = hit.collider.gameObject;
+                            closestDistanceSoFar = distanceToPlayer;
                         }
                     }
                 }
             }
         }
 
-        if (!foundPlayer)
+        if (foundPlayer)
         {
-            return false;
+            closestPlayer = closestPlayerSoFar;
+            Debug.DrawRay(transform.position, (closestPlayer.transform.position - transform.position).normalized * maxRange, Color.red);
+            return true;
         }
         else
         {
-            closestPlayer = closestPlayerSoFar;
-            Debug.DrawRay(transform.position, (closestPlayer.transform.position - transform.position).normalized * maxRange, Color.red); // Draw a ray to the closest player
-            return true;
+            closestPlayer = null;
+            return false;
         }
     }
 }
