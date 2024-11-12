@@ -9,9 +9,12 @@ public class Enemy : MonoBehaviour
 
     public float maxRange = 10000;
     public float speed = 2.5f;
-    public GameObject closestPlayer = null;
+    private GameObject closestPlayer = null;
     public ParticleSystem lightning;
     public ParticleSystem muzzleFlash;
+
+    public GameObject bullet;
+    public Transform firePoint;
 
     RaycastHit hit;
 
@@ -19,7 +22,7 @@ public class Enemy : MonoBehaviour
     private float timeToShoot = 0.0f;
 
     private Vector3 startPosition;
-    public float wanderOffset = 25.0f; // Wandering radius
+    public float wanderOffset = 10.0f; // Wandering radius
     public Vector3 randomPosition; // this is the random position to wander to
 
     private float timeStunned = 0.0f;
@@ -132,6 +135,8 @@ public class Enemy : MonoBehaviour
     public void Shoot()
     {
         muzzleFlash.Play();
+
+        GameObject bulletObject = Instantiate(bullet, firePoint.position, transform.rotation);
     }
 
     public void Stun()

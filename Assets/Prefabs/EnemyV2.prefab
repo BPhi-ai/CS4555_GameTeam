@@ -5436,9 +5436,10 @@ MonoBehaviour:
   state: 0
   maxRange: 10000
   speed: 2.5
-  closestPlayer: {fileID: 0}
   lightning: {fileID: 6767066874259952094}
   muzzleFlash: {fileID: 980089703457290085}
+  bullet: {fileID: 4013463511577885200, guid: cfb3f5613eac7924099aae1ea1541519, type: 3}
+  firePoint: {fileID: 659174705933905664}
   wanderOffset: 10
   randomPosition: {x: 0, y: 0, z: 0}
   timeLightningInterval: 2
