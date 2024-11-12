@@ -8,16 +8,9 @@ public class Healthbar : MonoBehaviour
     public Slider slider;
     public string entityName;
 
-    GameObject entity;
-    public void Start()
+    public void SetMaxHealth(long val)
     {
-        entity = GameObject.Find(entityName);
-        SetMaxHealth();
-    }
-
-    public void SetMaxHealth()
-    {
-        slider.maxValue = entity.GetComponent<Entity>().maxHealth;
+        slider.maxValue = val;
     }
 
     public void SetHealth(long val)

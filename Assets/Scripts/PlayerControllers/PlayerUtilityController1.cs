@@ -19,7 +19,7 @@ public class PlayerUtilityController : MonoBehaviour
     public ParticleSystem lightningPart;
 
     public Entity entity;
-    public Healthbar healthbar;
+    public Healthbar healthBar;
 
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 5f;
@@ -46,7 +46,8 @@ public class PlayerUtilityController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         entity = GetComponent<Entity>();
-        healthbar = GetComponent<Healthbar>();
+        healthBar = GetComponentInChildren<Healthbar>();
+        healthBar.SetMaxHealth(entity.maxHealth);
     }
 
     void Update()
@@ -70,7 +71,7 @@ public class PlayerUtilityController : MonoBehaviour
     public void DamageSphereRobot(long val)
     {
         entity.DamageEntity(val);
-        healthbar.SetHealth(entity.health);
+        healthBar.SetHealth(entity.health);
     }
     #endregion
 
@@ -227,7 +228,7 @@ public class PlayerUtilityController : MonoBehaviour
             print("Healing Entities");
             entity.HealEntity();
             shooterRobot.GetComponent<Entity>().HealEntity();
-            healthbar.SetHealth(entity.health);
+            healthBar.SetHealth(entity.health);
         }
     }
 
