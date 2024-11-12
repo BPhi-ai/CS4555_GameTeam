@@ -36,6 +36,9 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         camForward.y = 0;
         camRight.y = 0;
 
+        camForward = camForward.normalized;
+        camRight = camRight.normalized;
+
         Vector3 vectorMovementX = moveX * camRight;
         Vector3 vectorMovementZ = moveZ * camForward;
 
@@ -76,10 +79,11 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             animator.SetBool("isShooting", false);
         }
 
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(Jump());
-        }
+        }*/
     }
 
     IEnumerator Reload()

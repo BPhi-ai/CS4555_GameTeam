@@ -16714,9 +16714,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1008183807}
     - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: entity
+      value: 
+      objectReference: {fileID: 1226187817}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
       propertyPath: rotSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 2084188709}
     - target: {fileID: 9146203444703322965, guid: d6de7f2b20d58f148a22c8077db00f08, type: 3}
       propertyPath: lightPart
       value: 
@@ -17932,6 +17940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab7a48e5110990439b5eb5e9901412c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageValue: 20
 --- !u!65 &1387277506
 BoxCollider:
   m_ObjectHideFlags: 0
