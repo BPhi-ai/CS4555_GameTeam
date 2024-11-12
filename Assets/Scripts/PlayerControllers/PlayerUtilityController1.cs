@@ -18,11 +18,16 @@ public class PlayerUtilityController : MonoBehaviour
     public ParticleSystem shockWavePart;
     public ParticleSystem lightningPart;
 
+    public Entity entity;
+    public Healthbar healthbar;
 
     public float groundCheckRadius = 0.0f;
-    public float stunCooldown = 0f;
+    public float stunCooldown = 5f;
     public float stunRadius = 0.0f;
-    public float rotSpeed = 720f;
+    public float healRadius = 7.0f;
+    
+    // Default rotate speed
+    private float rotSpeed = 720f;
 
     private float lastStunTime;
 
@@ -40,6 +45,8 @@ public class PlayerUtilityController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        entity = GetComponent<Entity>();
+        healthbar = GetComponent<Healthbar>();
     }
 
     void Update()
@@ -51,13 +58,21 @@ public class PlayerUtilityController : MonoBehaviour
             isStunReady = true;
         }
         CheckInput();
-        // ChangeRotationToZero();
+        CheckHeal();
     }
 
     private void FixedUpdate()
     {
         CheckSurrounding();
     }
+
+    #region Damage Function
+    public void DamageSphereRobot(long val)
+    {
+        entity.DamageEntity(val);
+        healthbar.SetHealth(entity.health);
+    }
+    #endregion
 
     #region Get Input Function
     // Get keyboard input from the user
@@ -135,6 +150,7 @@ public class PlayerUtilityController : MonoBehaviour
         Vector3 rightRelativeVertInput = moveZ * camRight;
 
         moveDirection = forwardRelativeVertInput + rightRelativeVertInput;
+        
         if (moveDirection.sqrMagnitude > 0f)
         {
             moveDirection.Normalize();
@@ -144,7 +160,8 @@ public class PlayerUtilityController : MonoBehaviour
 
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
 
-            transform.root.rotation = Quaternion.RotateTowards(transform.root.rotation, targetRotation, rotSpeed * Time.deltaTime);
+            
+            transform.rotation = Quaternion.RotateTowards(transform.root.rotation, targetRotation, rotSpeed * Time.deltaTime);
 
             
         }
@@ -182,24 +199,6 @@ public class PlayerUtilityController : MonoBehaviour
         }
     }
 
-    private void ChangeRotationToZero()
-    {
-        if (CheckForRotation())
-        {
-            transform.rotation = Quaternion.identity;
-        }
-    }
-
-    private bool CheckForRotation()
-    {
-        if (transform.rotation != Quaternion.identity)
-        {
-            return true; // Return true if rotated off 0,0,0 
-        }
-
-        return false;
-    }
-
     // Return whether the player is grounded if at least one of the legs reside on the ground
     private bool CheckIfGrounded()
     {
@@ -219,9 +218,24 @@ public class PlayerUtilityController : MonoBehaviour
         return true;
     }
 
+    private void CheckHeal()
+    {
+        GameObject shooterRobot = GameObject.Find("PBRCharacter");
+        float distance = Vector3.Distance(shooterRobot.transform.position, transform.position);
+        if (distance < healRadius)
+        {
+            print("Healing Entities");
+            entity.HealEntity();
+            shooterRobot.GetComponent<Entity>().HealEntity();
+            healthbar.SetHealth(entity.health);
+        }
+    }
+
     public bool GetIsGrounded()
     {
         return isGrounded;
     }
     #endregion
+
+
 }
