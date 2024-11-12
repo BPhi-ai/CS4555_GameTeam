@@ -78,6 +78,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             }
         } else { 
             animator.SetBool("isShooting", false);
+            timeFix = 0; // adding this to ensure the counter is reset so the time is consistent
         }
 
         /*
