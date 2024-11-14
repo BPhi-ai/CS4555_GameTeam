@@ -10617,6 +10617,10 @@ PrefabInstance:
       propertyPath: droneCamera
       value: 
       objectReference: {fileID: 1875872618}
+    - target: {fileID: 1999792700396738242, guid: f432554f564e69242897607d34218939, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2836004475591197023, guid: f432554f564e69242897607d34218939, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -10666,14 +10670,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3786274601090064793, guid: f432554f564e69242897607d34218939, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6434051261534338390, guid: f432554f564e69242897607d34218939, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6434051261534338390, guid: f432554f564e69242897607d34218939, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

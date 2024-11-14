@@ -2869,7 +2869,6 @@ GameObject:
   - component: {fileID: 1999792700396738242}
   - component: {fileID: 6923059274041068837}
   - component: {fileID: 126527186330957908}
-  - component: {fileID: 5110728980649509171}
   - component: {fileID: 1673841884387203576}
   m_Layer: 0
   m_Name: PBRCharacter
@@ -2960,10 +2959,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.7922072
   m_Height: 2.6199827
   m_Direction: 1
-  m_Center: {x: 0, y: 0.80999136, z: 0}
+  m_Center: {x: 0.044754803, y: 0.80999136, z: 0}
 --- !u!114 &1999792700396738242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3027,29 +3026,6 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 720
   droneCamera: {fileID: 0}
---- !u!136 &5110728980649509171
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836004475591695743}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.6199827
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.80999136, z: 0}
 --- !u!114 &1673841884387203576
 MonoBehaviour:
   m_ObjectHideFlags: 0
