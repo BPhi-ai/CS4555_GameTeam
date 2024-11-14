@@ -7,12 +7,19 @@ public class Entity : MonoBehaviour
     public long health;
     public long maxHealth;
     public float regenRate = 10f;
+    public float healRadius = 7.0f;
+
+    public Healthbar healthBar;
+    
 
     public void Start()
     {
+        healthBar = GetComponentInChildren<Healthbar>();
+        healthBar.SetMaxHealth(maxHealth);
         health = maxHealth;
     }
 
+    #region Regen Health Section
     public void StartEntityRegen()
     {
         regenRate = 10f;
@@ -23,6 +30,24 @@ public class Entity : MonoBehaviour
         regenRate = 0f;
     }
 
+    public void CheckHeal(string goName)
+    {
+        GameObject other = GameObject.Find(goName);
+        float distance = Vector3.Distance(
+            transform.position,
+            other.transform.position
+        );
+
+        if (distance < healRadius)
+        {
+            HealEntity();
+            Entity otherEntity = other.GetComponent<Entity>();
+            otherEntity.HealEntity();
+            healthBar.SetHealth(health);
+            other.GetComponentInChildren<Healthbar>().SetHealth(otherEntity.health);
+        }
+    }
+
     public void HealEntity()
     {
         if (health < maxHealth)
@@ -30,9 +55,13 @@ public class Entity : MonoBehaviour
             health += (long)regenRate;
         }
     }
+    #endregion
 
+    #region Damage Entity
     public void DamageEntity(long dmgVal)
     {
         health -= dmgVal;
+        healthBar.SetHealth(health);
     }
+    #endregion
 }

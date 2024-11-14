@@ -11,16 +11,38 @@ public class Trap : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            try
-            {
-                PlayerUtilityController otherController = other.GetComponent<PlayerUtilityController>();
-                otherController.DamageSphereRobot(damageValue);
-            }
-            catch (System.Exception e)
-            {
-                print("Cannot find the Robot Sphere script");
-            }
+            
 
+            if (other.name == "robotSphere")
+            {
+                try
+                {
+                    print("Touching Sphere");
+                    Entity entity = other.GetComponent<Entity>();
+
+                    entity.DamageEntity(damageValue);
+                }
+                catch (System.Exception e)
+                {
+                    print("Cannot find the Robot Sphere script\n");
+                    print(e);
+                }
+            }
+            else if (other.name == "PBRCharacter")
+            {
+                try
+                {
+                    print("Touching Robot");
+                    Entity entity = other.GetComponent<Entity>();
+
+                    entity.DamageEntity(damageValue);
+                }
+                catch (System.Exception e)
+                {
+                    print("Cannot find the Shooter Robot Entity Script\n");
+                    print(e);
+                }
+            }
         }
     }
 }

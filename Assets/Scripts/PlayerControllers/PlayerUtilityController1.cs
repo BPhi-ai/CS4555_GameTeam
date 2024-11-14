@@ -46,8 +46,8 @@ public class PlayerUtilityController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         entity = GetComponent<Entity>();
-        healthBar = GetComponentInChildren<Healthbar>();
-        healthBar.SetMaxHealth(entity.maxHealth);
+        //healthBar = GetComponentInChildren<Healthbar>();
+        //healthBar.SetMaxHealth(entity.maxHealth);
     }
 
     void Update()
@@ -59,21 +59,13 @@ public class PlayerUtilityController : MonoBehaviour
             isStunReady = true;
         }
         CheckInput();
-        CheckHeal();
+        entity.CheckHeal("PBRCharacter");
     }
 
     private void FixedUpdate()
     {
         CheckSurrounding();
     }
-
-    #region Damage Function
-    public void DamageSphereRobot(long val)
-    {
-        entity.DamageEntity(val);
-        healthBar.SetHealth(entity.health);
-    }
-    #endregion
 
     #region Get Input Function
     // Get keyboard input from the user
@@ -217,19 +209,6 @@ public class PlayerUtilityController : MonoBehaviour
         }
 
         return true;
-    }
-
-    private void CheckHeal()
-    {
-        GameObject shooterRobot = GameObject.Find("PBRCharacter");
-        float distance = Vector3.Distance(shooterRobot.transform.position, transform.position);
-        if (distance < healRadius)
-        {
-            print("Healing Entities");
-            entity.HealEntity();
-            shooterRobot.GetComponent<Entity>().HealEntity();
-            healthBar.SetHealth(entity.health);
-        }
     }
 
     public bool GetIsGrounded()
