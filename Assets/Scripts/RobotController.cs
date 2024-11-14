@@ -46,9 +46,10 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         moveDirection = (vectorMovementX + vectorMovementZ).normalized;
 
         // If there is movement input, move and rotate the character
+
+        MoveAndRotate(); // probably works outside of the below if statement
         if (moveDirection != Vector3.zero)
         {
-            MoveAndRotate();
             animator.SetBool("isMoving", true);  // Trigger the movement animation
         }
         else
@@ -77,6 +78,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             }
         } else { 
             animator.SetBool("isShooting", false);
+            timeFix = 0; // adding this to ensure the counter is reset so the time is consistent
         }
 
         /*
@@ -108,7 +110,62 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
 
         // Rotate the GameObject to face the direction of movement
+        
+        /*
         Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        */
+
+        if (!RotateTowardsMarkedEnemies())
+        {
+            LookAtMouse();
+        }
     }
+
+    bool RotateTowardsMarkedEnemies()
+    {
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (enemy.GetComponent<Outline>().enabled)
+            {
+                //print("Marked enemy found");
+                Vector3 direction = (enemy.transform.position - transform.position).normalized;
+                direction.y = 0;
+
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+                //float turnAngle = Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg;
+                //float smoothAngle = Mathf.LerpAngle(transform.eulerAngles.y, -turnAngle, rb.velocity.magnitude * Time.deltaTime);
+                //GetComponent<Rigidbody>().MoveRotation(Quaternion.Euler(0, smoothAngle, transform.eulerAngles.z));
+                //transform.rotation = Quaternion.LookRotation(direction);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void LookAtMouse()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+
+        Ray ray = droneCamera.ScreenPointToRay(mouseScreenPosition);
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+
+        float rayDistance;
+        if (groundPlane.Raycast(ray, out rayDistance))
+        {
+            Vector3 worldMousePosition = ray.GetPoint(rayDistance);
+
+            Vector3 direction = (worldMousePosition - transform.position).normalized;
+            direction.y = 0;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            // transform.rotation = Quaternion.LookRotation(direction);
+        }
+    }
+
 }
