@@ -2864,7 +2864,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2836004475591197023}
   - component: {fileID: 2836004473841745626}
-  - component: {fileID: 1504750459660921875}
   - component: {fileID: 7529005104271111976}
   - component: {fileID: 1999792700396738242}
   - component: {fileID: 6923059274041068837}
@@ -2921,25 +2920,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1504750459660921875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836004475591695743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99fb097101a356d41818bd4986cef923, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletBlock: {fileID: 898352054643807838, guid: fef8ff933f41978459ddf5361b7255cb, type: 3}
-  firePoint: {fileID: 2836004475591196945}
-  bulletSpeed: 100
-  timeFix: 0
-  moveSpeed: 5
-  rotationSpeed: 720
-  droneCamera: {fileID: 0}
 --- !u!136 &7529005104271111976
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3019,7 +2999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fb097101a356d41818bd4986cef923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletBlock: {fileID: 898352054643807838, guid: fef8ff933f41978459ddf5361b7255cb, type: 3}
+  bulletBlock: {fileID: 4013463511577885200, guid: 9893a7ebd1e79b84abe0e4aee6e90026, type: 3}
   firePoint: {fileID: 2836004475591196945}
   bulletSpeed: 100
   timeFix: 0

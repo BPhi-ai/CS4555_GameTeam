@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum States {WANDER, STUNNED, CHASE}
+    public enum States {WANDER, STUNNED, CHASE, DEAD}
     public States state = States.WANDER;
 
     public float maxRange = 10000;
@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
 
     public GameObject bullet;
     public Transform firePoint;
+
+    private Entity enemyEntity;
 
     RaycastHit hit;
 
@@ -38,9 +40,15 @@ public class Enemy : MonoBehaviour
 
         // Get the Animator component attached to the GameObject
         animator = GetComponent<Animator>();
+        enemyEntity = GetComponent<Entity>();
     }
     void FixedUpdate()
     {
+        if (enemyEntity.health <= 0)
+        {
+            state = States.DEAD;
+        }
+
         switch (state)
         {
             case States.WANDER:
@@ -129,6 +137,12 @@ public class Enemy : MonoBehaviour
                     Shoot();
                 }
                 break;
+            case States.DEAD:
+                animator.SetFloat("Y", 0);
+                animator.SetBool("Aiming", false);
+                animator.SetBool("Dead", true);
+                break;
+
         }
     }
 

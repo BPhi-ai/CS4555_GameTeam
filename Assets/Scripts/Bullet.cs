@@ -42,6 +42,10 @@ public class Bullet : MonoBehaviour
             entity.DamageEntity(damage);
             Destroy(gameObject);
         }
+        else if (other.CompareTag("Enemy") && fromEnemy)
+        {
+            // nothing happens
+        }
         else
         {
             Destroy(gameObject);

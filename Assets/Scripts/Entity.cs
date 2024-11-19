@@ -10,7 +10,6 @@ public class Entity : MonoBehaviour
     public float healRadius = 7.0f;
 
     public Healthbar healthBar;
-    
 
     public void Start()
     {

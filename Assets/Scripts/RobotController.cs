@@ -72,8 +72,8 @@ public class PlayerMovementWithAnimation : MonoBehaviour
                 GameObject bullet = Instantiate(bulletBlock, firePoint.position, firePoint.rotation);
 
                 // Apply velocity to the bullet's Rigidbody to make it move forward
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-                rb.velocity = firePoint.forward * bulletSpeed;
+                // Rigidbody rb = bullet.GetComponent<Rigidbody>();
+                // rb.velocity = firePoint.forward * bulletSpeed;
                 timeFix = 0;
             }
         } else { 
