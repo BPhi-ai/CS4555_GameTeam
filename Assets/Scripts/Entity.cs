@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public enum States {ALIVE, DEAD}
+    public States state = States.ALIVE;
+
     public long health;
     public long maxHealth;
     public float regenRate = 10f;
     public float healRadius = 7.0f;
+
+    
 
     public Healthbar healthBar;
     
@@ -45,6 +50,14 @@ public class Entity : MonoBehaviour
             otherEntity.HealEntity();
             healthBar.SetHealth(health);
             other.GetComponentInChildren<Healthbar>().SetHealth(otherEntity.health);
+        }
+    }
+
+    public void CheckAliveStatus()
+    {
+        if (health <= 0f)
+        {
+            state = States.DEAD;
         }
     }
 
