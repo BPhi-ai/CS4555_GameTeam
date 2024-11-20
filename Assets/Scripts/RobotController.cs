@@ -13,6 +13,8 @@ public class PlayerMovementWithAnimation : MonoBehaviour
     public float rotationSpeed = 720f; // Speed of rotation
     private Vector3 moveDirection;
 
+    public AudioSource audioSource;
+
     private Animator animator;        // Reference to the Animator component
 
     public Camera droneCamera;
@@ -70,6 +72,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             {
                 // Spawn the bullet at the firePoint's position and rotation
                 GameObject bullet = Instantiate(bulletBlock, firePoint.position, firePoint.rotation);
+                audioSource.Play();
 
                 // Apply velocity to the bullet's Rigidbody to make it move forward
                 // Rigidbody rb = bullet.GetComponent<Rigidbody>();
