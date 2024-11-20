@@ -23,6 +23,11 @@ public class Entity : MonoBehaviour
         health = maxHealth;
     }
 
+    private void Update()
+    {
+        CheckAliveStatus();
+    }
+
     #region Regen Health Section
     public void StartEntityRegen()
     {
@@ -72,8 +77,12 @@ public class Entity : MonoBehaviour
     #region Damage Entity
     public void DamageEntity(long dmgVal)
     {
-        health -= dmgVal;
-        healthBar.SetHealth(health);
+        if (health > 0f)
+        {
+            health -= dmgVal;
+            healthBar.SetHealth(health);
+        }
+        
     }
     #endregion
 }

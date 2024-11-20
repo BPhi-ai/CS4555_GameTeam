@@ -19,7 +19,6 @@ public class PlayerUtilityController : MonoBehaviour
     public ParticleSystem lightningPart;
 
     public Entity entity;
-    public Healthbar healthBar;
 
     public float groundCheckRadius = 0.0f;
     public float stunCooldown = 5f;
@@ -46,8 +45,8 @@ public class PlayerUtilityController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         entity = GetComponent<Entity>();
-        //healthBar = GetComponentInChildren<Healthbar>();
-        //healthBar.SetMaxHealth(entity.maxHealth);
+        // healthBar = GetComponentInChildren<Healthbar>();
+        // healthBar.SetMaxHealth(entity.maxHealth);
     }
 
     void Update()
@@ -60,6 +59,7 @@ public class PlayerUtilityController : MonoBehaviour
         }
         CheckInput();
         entity.CheckHeal("PBRCharacter");
+        CheckForDeath();
     }
 
     private void FixedUpdate()
@@ -217,5 +217,15 @@ public class PlayerUtilityController : MonoBehaviour
     }
     #endregion
 
-
+    #region Other Check Functions
+    public void CheckForDeath()
+    {
+        if (entity.state == Entity.States.DEAD)
+        {
+            Animator anim = GetComponent<Animator>();
+            anim.SetBool("Open_Anim", false);
+            print("This Player is Dead");
+        }
+    }
+    #endregion
 }

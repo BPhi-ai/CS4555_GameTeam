@@ -11800,6 +11800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257ff5587fbdd384c9bd2304f0d33648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   health: 150
   maxHealth: 150
   regenRate: 10

@@ -2868,7 +2868,6 @@ GameObject:
   - component: {fileID: 1999792700396738242}
   - component: {fileID: 6923059274041068837}
   - component: {fileID: 126527186330957908}
-  - component: {fileID: 1673841884387203576}
   m_Layer: 0
   m_Name: PBRCharacter
   m_TagString: Player
@@ -2955,6 +2954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257ff5587fbdd384c9bd2304f0d33648, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 0
   health: 200
   maxHealth: 200
   regenRate: 10
@@ -3006,23 +3006,6 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 720
   droneCamera: {fileID: 0}
---- !u!114 &1673841884387203576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836004475591695743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 257ff5587fbdd384c9bd2304f0d33648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 200
-  maxHealth: 200
-  regenRate: 10
-  healRadius: 7
-  healthBar: {fileID: 8689084032906921550}
 --- !u!1 &4655750233525277666
 GameObject:
   m_ObjectHideFlags: 0
