@@ -15,7 +15,6 @@ public class Entity : MonoBehaviour
     
 
     public Healthbar healthBar;
-    
 
     public void Start()
     {

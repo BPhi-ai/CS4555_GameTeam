@@ -8,6 +8,8 @@ public class Button : MonoBehaviour
     [SerializeField] private Material material;
     private Color defaultColor;
 
+    public Obstacles obstacles;
+
     private void Awake()
     {
         defaultColor = new Color(0.07843135f, 0.7529412f, 1f, 1f);
@@ -20,6 +22,8 @@ public class Button : MonoBehaviour
         {
             Debug.Log("Contact");
             material.SetColor("_Color", Color.white);
+
+            obstacles.Explode();
         }
     }
 
