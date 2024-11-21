@@ -37,6 +37,7 @@ public class PlayerUtilityController : MonoBehaviour
 
     [SerializeField] private bool isGrounded = false;
     private bool canJump = false;
+    private bool canMove = true;
     [SerializeField] private bool isStunReady = true;
 
     private Vector3 direction;
@@ -88,57 +89,66 @@ public class PlayerUtilityController : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
 
-        if (Input.GetKey(KeyCode.W))
+        if (entity.state == Entity.States.DEAD)
         {
-            moveX = 1f;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveZ = -1f;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveX = -1f;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveZ = 1f;
+            canMove = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (canMove)
         {
-            Vector3 jump = new Vector3(0f, 1f, 0f);
-            rb.AddForce(jump * 10f, ForceMode.Impulse);
-        }
-        if (Input.GetKey(KeyCode.F) && isStunReady)
-        {
-            // Play necessary particle effects
-            lightningPart.Play();
-            lightPart.Play();
-            shockWavePart.Play();
-            stunSound.Play();
-  
-
-            // Check who is in radius
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
+            if (Input.GetKey(KeyCode.W))
             {
-                float distance = Vector3.Distance(enemy.transform.position, transform.position);
-                // Stun enemies here 
-                if (distance <= stunRadius)
-                {
-                    // Call enemy stun method
-                    Enemy enemScript = enemy.GetComponent<Enemy>();
-                    // Call stun method from enemy script
-                    enemScript.Stun();
-                    Debug.Log(enemy.name + " is a distance of " + distance);
-                }
-
+                moveX = 1f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveZ = -1f;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                moveX = -1f;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                moveZ = 1f;
             }
 
-            lastStunTime = Time.time;
-            isStunReady = false;
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                Vector3 jump = new Vector3(0f, 1f, 0f);
+                rb.AddForce(jump * 10f, ForceMode.Impulse);
+            }
+            if (Input.GetKey(KeyCode.F) && isStunReady)
+            {
+                // Play necessary particle effects
+                lightningPart.Play();
+                lightPart.Play();
+                shockWavePart.Play();
+                stunSound.Play();
+
+
+                // Check who is in radius
+                GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+                foreach (GameObject enemy in enemies)
+                {
+                    float distance = Vector3.Distance(enemy.transform.position, transform.position);
+                    // Stun enemies here 
+                    if (distance <= stunRadius)
+                    {
+                        // Call enemy stun method
+                        Enemy enemScript = enemy.GetComponent<Enemy>();
+                        // Call stun method from enemy script
+                        enemScript.Stun();
+                        Debug.Log(enemy.name + " is a distance of " + distance);
+                    }
+
+                }
+
+                lastStunTime = Time.time;
+                isStunReady = false;
+            }
         }
+        
 
         // Normalize movement so diagonal movement isn't faster
         Vector3 forwardRelativeVertInput = moveX * camForward;
