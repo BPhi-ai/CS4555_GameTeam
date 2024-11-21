@@ -9,6 +9,8 @@ public class PlayerMovementWithAnimation : MonoBehaviour
     public float bulletSpeed = 20f;
     public float timeFix = 0;
 
+    private bool canMove = true;
+
 
     public float moveSpeed = 5f;      // Speed of movement
     public float rotationSpeed = 720f; // Speed of rotation
@@ -47,6 +49,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
 
         camForward = camForward.normalized;
         camRight = camRight.normalized;
+        
 
         Vector3 vectorMovementX = moveX * camRight;
         Vector3 vectorMovementZ = moveZ * camForward;

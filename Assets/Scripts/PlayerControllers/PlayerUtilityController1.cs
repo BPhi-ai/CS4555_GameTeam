@@ -30,6 +30,8 @@ public class PlayerUtilityController : MonoBehaviour
 
     private float lastStunTime;
 
+    private bool canMove = true;
+
 
     // public float groundCheckDistance;
 
@@ -86,28 +88,39 @@ public class PlayerUtilityController : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
 
-        if (Input.GetKey(KeyCode.I))
+        if (entity.state == Entity.States.DEAD)
         {
-            moveX = 1f;
-        }
-        if (Input.GetKey(KeyCode.J))
-        {
-            moveZ = -1f;
-        }
-        if (Input.GetKey(KeyCode.K))
-        {
-            moveX = -1f;
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-            moveZ = 1f;
+            canMove = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        if (canMove)
         {
-            Vector3 jump = new Vector3(0f, 1f, 0f);
-            rb.AddForce(jump * 10f, ForceMode.Impulse);
+            if (Input.GetKey(KeyCode.I))
+            {
+                moveX = 1f;
+            }
+            if (Input.GetKey(KeyCode.J))
+            {
+                moveZ = -1f;
+            }
+            if (Input.GetKey(KeyCode.K))
+            {
+                moveX = -1f;
+            }
+            if (Input.GetKey(KeyCode.L))
+            {
+                moveZ = 1f;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) && canJump)
+            {
+                Vector3 jump = new Vector3(0f, 1f, 0f);
+                rb.AddForce(jump * 10f, ForceMode.Impulse);
+            }
         }
+        
+
+        
         if (Input.GetKey(KeyCode.O) && isStunReady)
         {
             // Play necessary particle effects

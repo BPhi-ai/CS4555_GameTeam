@@ -7446,6 +7446,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011112872720, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
   m_PrefabInstance: {fileID: 30623858}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &676317364 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2629948374853353742, guid: 0752177b1666c1c47a9122df5616687f, type: 3}
+  m_PrefabInstance: {fileID: 1561727530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &678261107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14295,6 +14300,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1008183807}
+    - target: {fileID: 1663060785121500554, guid: 0752177b1666c1c47a9122df5616687f, type: 3}
+      propertyPath: fireLight
+      value: 
+      objectReference: {fileID: 676317364}
     - target: {fileID: 1663060785121500554, guid: 0752177b1666c1c47a9122df5616687f, type: 3}
       propertyPath: audioSource
       value: 
