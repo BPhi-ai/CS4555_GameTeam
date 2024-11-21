@@ -13208,6 +13208,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1141653993547343963, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3119177976613139922, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
       propertyPath: m_Name
       value: PlayerDroneController
@@ -13252,11 +13256,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7751915630575948416, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+      propertyPath: clickSound
+      value: 
+      objectReference: {fileID: 1453428973}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+--- !u!82 &1453428973 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1141653993547343963, guid: c4435e07e6142ce4682ca2a943b7d8fe, type: 3}
+  m_PrefabInstance: {fileID: 1453428972}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1462853265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011112872720, guid: 85a8865d1bf4a63478038fae23776de8, type: 3}
