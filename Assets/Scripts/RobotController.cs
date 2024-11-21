@@ -23,7 +23,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
     public Entity entity;
     public ParticleSystem fire;
     public ParticleSystem ember;
-    public ParticleSystem light;
+    public ParticleSystem fireLight;
 
     void Start()
     {
@@ -185,10 +185,9 @@ public class PlayerMovementWithAnimation : MonoBehaviour
     {
         if (entity.state == Entity.States.DEAD)
         {
-            print("This Player PBR is Dead");
             fire.Play();
             ember.Play();
-            light.Play();
+            fireLight.Play();
 
         }
     }
