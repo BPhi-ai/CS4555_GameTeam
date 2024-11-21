@@ -12,7 +12,7 @@ public class Entity : MonoBehaviour
     public float regenRate = 10f;
     public float healRadius = 7.0f;
 
-    
+    public AudioSource hurtSound;
 
     public Healthbar healthBar;
 
@@ -82,6 +82,7 @@ public class Entity : MonoBehaviour
         {
             health -= dmgVal;
             healthBar.SetHealth(health);
+            hurtSound.Play();
         }
         
     }

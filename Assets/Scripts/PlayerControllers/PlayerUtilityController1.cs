@@ -18,6 +18,8 @@ public class PlayerUtilityController : MonoBehaviour
     public ParticleSystem shockWavePart;
     public ParticleSystem lightningPart;
 
+    public AudioSource stunSound;
+
     public Entity entity;
 
     public float groundCheckRadius = 0.0f;
@@ -114,7 +116,7 @@ public class PlayerUtilityController : MonoBehaviour
             lightningPart.Play();
             lightPart.Play();
             shockWavePart.Play();
-
+            stunSound.Play();
   
 
             // Check who is in radius
