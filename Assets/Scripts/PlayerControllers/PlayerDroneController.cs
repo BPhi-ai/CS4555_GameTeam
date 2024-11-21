@@ -10,6 +10,8 @@ public class PlayerDroneController : MonoBehaviour
     public float sensitivity;
     public float speed;
 
+    public AudioSource clickSound;
+
     void Update()
     {
         if (Input.GetMouseButton(1)) // Holding right click
@@ -123,6 +125,7 @@ public class PlayerDroneController : MonoBehaviour
                 selection = highlight;
                 selection.gameObject.GetComponent<Outline>().enabled = true;
                 selection.gameObject.GetComponent<Outline>().OutlineColor = Color.yellow;
+                clickSound.Play();
 
                 // Clear the highlight as it has now become a selection
                 highlight = null;
