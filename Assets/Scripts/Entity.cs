@@ -61,6 +61,7 @@ public class Entity : MonoBehaviour
     {
         if (health <= 0f && state != States.DEAD)
         {
+            health = 0;
             state = States.DEAD;
         }
     }
@@ -69,7 +70,6 @@ public class Entity : MonoBehaviour
     {
         if (health < maxHealth)
         {
-            health = 0;
             health += (long)regenRate;
         }
     }
