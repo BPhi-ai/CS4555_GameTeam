@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     public Transform firePoint;
 
     private Entity enemyEntity;
+    public AudioSource audioSource;
 
     RaycastHit hit;
 
@@ -149,6 +150,7 @@ public class Enemy : MonoBehaviour
     public void Shoot()
     {
         muzzleFlash.Play();
+        audioSource.Play();
 
         GameObject bulletObject = Instantiate(bullet, firePoint.position, transform.rotation);
     }
