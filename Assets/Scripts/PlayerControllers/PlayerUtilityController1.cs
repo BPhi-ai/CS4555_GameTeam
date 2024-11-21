@@ -86,19 +86,19 @@ public class PlayerUtilityController : MonoBehaviour
         camForward = camForward.normalized;
         camRight = camRight.normalized;
 
-        if (Input.GetKey(KeyCode.I))
+        if (Input.GetKey(KeyCode.W))
         {
             moveX = 1f;
         }
-        if (Input.GetKey(KeyCode.J))
+        if (Input.GetKey(KeyCode.A))
         {
             moveZ = -1f;
         }
-        if (Input.GetKey(KeyCode.K))
+        if (Input.GetKey(KeyCode.S))
         {
             moveX = -1f;
         }
-        if (Input.GetKey(KeyCode.L))
+        if (Input.GetKey(KeyCode.D))
         {
             moveZ = 1f;
         }
@@ -108,7 +108,7 @@ public class PlayerUtilityController : MonoBehaviour
             Vector3 jump = new Vector3(0f, 1f, 0f);
             rb.AddForce(jump * 10f, ForceMode.Impulse);
         }
-        if (Input.GetKey(KeyCode.O) && isStunReady)
+        if (Input.GetKey(KeyCode.F) && isStunReady)
         {
             // Play necessary particle effects
             lightningPart.Play();

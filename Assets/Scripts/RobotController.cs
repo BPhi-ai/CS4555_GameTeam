@@ -71,7 +71,7 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             StartCoroutine(Reload());
         }
 
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.O) || Input.GetButton("Fire1"))
         {
             timeFix += Time.deltaTime;
             animator.SetBool("isShooting", true);
