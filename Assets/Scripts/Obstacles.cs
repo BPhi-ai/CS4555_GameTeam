@@ -7,6 +7,8 @@ public class Obstacles : MonoBehaviour
     public ParticleSystem explosion;
     public GameObject[] obstaclesToRemove;
 
+    public AudioSource explodeSound;
+
     private bool exploded = false;
 
     public void Explode()
@@ -15,6 +17,7 @@ public class Obstacles : MonoBehaviour
         {
             exploded = true;
             explosion.Play();
+            explodeSound.Play();
             foreach (GameObject obstacle in obstaclesToRemove)
             {
                 Destroy(obstacle);

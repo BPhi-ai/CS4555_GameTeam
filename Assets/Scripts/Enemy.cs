@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
 
     private Entity enemyEntity;
     public AudioSource audioSource;
+    public AudioSource deathSound;
 
     RaycastHit hit;
 
@@ -45,9 +46,10 @@ public class Enemy : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (enemyEntity.health <= 0)
+        if (enemyEntity.health <= 0 && state != States.DEAD)
         {
             state = States.DEAD;
+            deathSound.Play();
         }
 
         switch (state)
