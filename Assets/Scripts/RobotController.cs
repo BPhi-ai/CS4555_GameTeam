@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class PlayerMovementWithAnimation : MonoBehaviour
 {
@@ -19,10 +20,16 @@ public class PlayerMovementWithAnimation : MonoBehaviour
 
     public Camera droneCamera;
 
+    public Entity entity;
+    public ParticleSystem fire;
+    public ParticleSystem ember;
+    public ParticleSystem light;
+
     void Start()
     {
         // Get the Animator component attached to the GameObject
         animator = GetComponent<Animator>();
+        entity = GetComponent<Entity>();
     }
 
     void Update()
@@ -89,6 +96,8 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         {
             StartCoroutine(Jump());
         }*/
+
+        CheckForDeath();
     }
 
     IEnumerator Reload()
@@ -170,5 +179,19 @@ public class PlayerMovementWithAnimation : MonoBehaviour
             // transform.rotation = Quaternion.LookRotation(direction);
         }
     }
+
+    #region Other Check Functions
+    public void CheckForDeath()
+    {
+        if (entity.state == Entity.States.DEAD)
+        {
+            print("This Player PBR is Dead");
+            fire.Play();
+            ember.Play();
+            light.Play();
+
+        }
+    }
+    #endregion
 
 }

@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+    public enum States {ALIVE, DEAD}
+    public States state = States.ALIVE;
+
     public long health;
     public long maxHealth;
     public float regenRate = 10f;
     public float healRadius = 7.0f;
+
+    
 
     public Healthbar healthBar;
 
@@ -16,6 +21,11 @@ public class Entity : MonoBehaviour
         healthBar = GetComponentInChildren<Healthbar>();
         healthBar.SetMaxHealth(maxHealth);
         health = maxHealth;
+    }
+
+    private void Update()
+    {
+        CheckAliveStatus();
     }
 
     #region Regen Health Section
@@ -47,6 +57,14 @@ public class Entity : MonoBehaviour
         }
     }
 
+    public void CheckAliveStatus()
+    {
+        if (health <= 0f)
+        {
+            state = States.DEAD;
+        }
+    }
+
     public void HealEntity()
     {
         if (health < maxHealth)
@@ -59,8 +77,12 @@ public class Entity : MonoBehaviour
     #region Damage Entity
     public void DamageEntity(long dmgVal)
     {
-        health -= dmgVal;
-        healthBar.SetHealth(health);
+        if (health > 0f)
+        {
+            health -= dmgVal;
+            healthBar.SetHealth(health);
+        }
+        
     }
     #endregion
 }
