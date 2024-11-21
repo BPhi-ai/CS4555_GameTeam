@@ -19,6 +19,9 @@ public class PlayerMovementWithAnimation : MonoBehaviour
     public Camera droneCamera;
 
     public Entity entity;
+    public ParticleSystem fire;
+    public ParticleSystem ember;
+    public ParticleSystem light;
 
     void Start()
     {
@@ -180,6 +183,10 @@ public class PlayerMovementWithAnimation : MonoBehaviour
         if (entity.state == Entity.States.DEAD)
         {
             print("This Player PBR is Dead");
+            fire.Play();
+            ember.Play();
+            light.Play();
+
         }
     }
     #endregion
